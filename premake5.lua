@@ -11,6 +11,15 @@ workspace "PathX"
 
     IncludeDirs = {}
 	IncludeDirs["spdlog"] = "Engine/Vendor/spdlog/include"
+	IncludeDirs["GLFW"] = "Visualizer/Vendor/GLFW/include"
+	IncludeDirs["glad"] = "Visualizer/Vendor/glad/include"
+	IncludeDirs["ImGui"] = "Visualizer/Vendor/ImGui"
+
+	group "Dependencies"
+		include "Visualizer/Vendor/glad_premake5.lua"
+		include "Visualizer/Vendor/GLFW_premake5.lua"
+		include "Visualizer/Vendor/ImGui_premake5.lua"
+	group ""
 
 project "Engine"
     location "Engine"
@@ -70,7 +79,7 @@ project "Visualizer"
 	files
 	{
 		"%{prj.name}/Source/**.h",
-		"%{prj.name}/Source/**.cpp"
+		"%{prj.name}/Source/**.cpp",
 	}
 
 	includedirs
@@ -79,11 +88,17 @@ project "Visualizer"
 		"Engine/Source",
 		"Engine/Source/Common",
 		"%{IncludeDirs.spdlog}",
+		"%{IncludeDirs.GLFW}",
+		"%{IncludeDirs.glad}",
+		"%{IncludeDirs.ImGui}",
 	}
 
 	links
 	{
-		"Engine"
+		"Engine",
+		"glad",
+		"GLFW",
+		"ImGui",
 	}
 	
 filter "configurations:Debug"
@@ -118,7 +133,7 @@ project "EngineTest"
     files
 	{
 		"%{prj.name}/Source/**.h",
-		"%{prj.name}/Source/**.cpp"
+		"%{prj.name}/Source/**.cpp",
 	}
 
     includedirs
@@ -131,7 +146,7 @@ project "EngineTest"
 
     links
 	{
-		"Engine"
+		"Engine",
 	}
 
     filter "configurations:Debug"
