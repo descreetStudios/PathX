@@ -104,8 +104,6 @@ For each neighbor of the current node:
   - The goal is reached, or  
   - The open list becomes empty (no path exists)
 
----
-
 ## Why A* Is Effective
 
 - **Optimal**: Finds the shortest path when using an admissible heuristic  
